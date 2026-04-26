@@ -122,3 +122,11 @@ Uygulama calistiktan sonra tarayicida verilen local adres uzerinden acilabilir.
 ## Gelistirici
 
 GitHub: nullablege
+
+## Proje Görselleri 
+<img width="3439" height="1223" alt="Screenshot_125" src="https://github.com/user-attachments/assets/56e0acd8-5a48-46a2-804b-3143710b31f6" />
+<img width="3439" height="1229" alt="Screenshot_126" src="https://github.com/user-attachments/assets/5cc88647-84bb-4515-a443-75d95c57de8d" />
+<img width="3439" height="1224" alt="Screenshot_127" src="https://github.com/user-attachments/assets/73103b33-c965-4da9-9e35-bb4ca1b069fa" />
+<img width="3439" height="1232" alt="Screenshot_128" src="https://github.com/user-attachments/assets/34437fee-1305-4e43-8857-6cd87cc53800" />
+<img width="3439" height="1226" alt="Screenshot_130" src="https://github.com/user-attachments/assets/746e3836-604b-4d9a-b6cc-0b0ec8072275" />
+
