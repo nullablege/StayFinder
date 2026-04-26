@@ -1,0 +1,167 @@
+@model DashboardDto
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/hotel-booking-platform/css/dashboard.css" />
+}
+
+<nav class="main-nav">
+    <div class="container">
+        <a asp-controller="Home" asp-action="Index" class="nav-logo">StayFinder</a>
+        <button class="nav-toggle">Menu</button>
+        <ul class="nav-links">
+            <li><a asp-controller="Home" asp-action="Index" class="active">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Hotels</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Search</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="section-header">
+        <h2>Dashboard</h2>
+        <p>Live updates from travel and market APIs</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="widget-card wide">
+            <div class="widget-header">
+                <div class="widget-icon">🌤</div>
+                <div class="widget-title">Weather</div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.Weather.City))
+            {
+                <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                    @if (!string.IsNullOrWhiteSpace(Model.Weather.Icon))
+                    {
+                        <img src="https://openweathermap.org/img/wn/@(Model.Weather.Icon)@@2x.png" alt="@Model.Weather.Condition" style="width: 90px; height: 90px;">
+                    }
+                    <div>
+                        <div class="widget-value">@Model.Weather.Temperature °C</div>
+                        <div class="widget-subtitle">@Model.Weather.City, @Model.Weather.Country</div>
+                        <div style="font-size: 0.85rem; color: var(--gray-500);">@Model.Weather.Condition</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+
+        <div class="widget-card">
+            <div class="widget-header">
+                <div class="widget-icon">💱</div>
+                <div class="widget-title">Exchange Rates</div>
+            </div>
+            @if (Model.ExchangeRates.Any())
+            {
+                foreach (var item in Model.ExchangeRates)
+                {
+                    <div class="widget-subtitle">@item.Pair</div>
+                    <div class="widget-value" style="font-size: 1.3rem;">@item.Rate</div>
+                }
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+
+        <div class="widget-card">
+            <div class="widget-header">
+                <div class="widget-icon">⛽</div>
+                <div class="widget-title">Fuel Prices</div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.Fuel.Country))
+            {
+                <div class="widget-subtitle">@Model.Fuel.Country - @Model.Fuel.Currency</div>
+                <div class="widget-value" style="font-size: 1.25rem;">Gasoline @Model.Fuel.Gasoline</div>
+                <div class="widget-subtitle">Diesel @Model.Fuel.Diesel</div>
+                <div class="widget-subtitle">LPG @Model.Fuel.Lpg</div>
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+
+        <div class="widget-card">
+            <div class="widget-header">
+                <div class="widget-icon">📈</div>
+                <div class="widget-title">Crypto</div>
+            </div>
+            @if (Model.CryptoRates.Any())
+            {
+                foreach (var item in Model.CryptoRates)
+                {
+                    <div class="widget-subtitle">1 BTC = @item.Value @item.Symbol</div>
+                }
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+
+        <div class="widget-card wide">
+            <div class="widget-header">
+                <div class="widget-icon">📰</div>
+                <div class="widget-title">News Headlines</div>
+            </div>
+            @if (Model.News.Any())
+            {
+                foreach (var item in Model.News)
+                {
+                    <div style="margin-bottom: 14px;">
+                        <div class="widget-value" style="font-size: 1.15rem;">@item.Title</div>
+                        <div class="widget-subtitle">@item.Snippet</div>
+                        <div class="widget-subtitle">@item.Source</div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+
+        <div class="widget-card full">
+            <div class="widget-header">
+                <div class="widget-icon">🍽</div>
+                <div class="widget-title">Daily Food Suggestion</div>
+            </div>
+            @if (!string.IsNullOrWhiteSpace(Model.Food.Name))
+            {
+                <div style="display: grid; grid-template-columns: 180px 1fr; gap: 20px; align-items: center;">
+                    @if (!string.IsNullOrWhiteSpace(Model.Food.ImageUrl))
+                    {
+                        <img src="@Model.Food.ImageUrl" alt="@Model.Food.Name" style="width: 180px; height: 120px; object-fit: cover; border-radius: 12px;" />
+                    }
+                    <div>
+                        <div class="widget-value">@Model.Food.Name</div>
+                        <div class="widget-subtitle">@Model.Food.Description</div>
+                        <div class="widget-subtitle">@Model.Food.CookTime</div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="widget-subtitle">No data found</div>
+            }
+        </div>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-logo">StayFinder</div>
+        <ul class="footer-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Hotels</a></li>
+        </ul>
+    </div>
+</footer>

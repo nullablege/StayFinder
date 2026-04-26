@@ -1,0 +1,102 @@
+@model HotelDto
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/hotel-booking-platform/css/detail.css" />
+}
+
+<nav class="main-nav">
+    <div class="container">
+        <a asp-controller="Home" asp-action="Index" class="nav-logo">StayFinder</a>
+        <button class="nav-toggle">Menu</button>
+        <ul class="nav-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels" class="active">Hotels</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Search</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container" style="padding-top: 40px; padding-bottom: 40px;">
+    <a class="back-link" asp-controller="Home" asp-action="Hotels" asp-route-destination="@Model.Destination" asp-route-arrivalDate="@Model.ArrivalDate" asp-route-departureDate="@Model.DepartureDate" asp-route-adults="@Model.Adults">Back to hotels</a>
+
+    @if (Model.Photos.Any())
+    {
+        <div class="detail-gallery">
+            <img class="gallery-main" src="@Model.Photos[0]" alt="@Model.Name">
+            <img class="gallery-side" src="@(Model.Photos.Count > 1 ? Model.Photos[1] : Model.Photos[0])" alt="@Model.Name">
+            <img class="gallery-side" src="@(Model.Photos.Count > 2 ? Model.Photos[2] : Model.Photos[0])" alt="@Model.Name">
+        </div>
+    }
+
+    <div class="detail-layout">
+        <div class="detail-info">
+            <h1>@Model.Name</h1>
+            <div class="detail-meta">
+                @if (!string.IsNullOrWhiteSpace(Model.ReviewScore))
+                {
+                    <div class="detail-rating">@Model.ReviewScore</div>
+                }
+                <div class="detail-reviews">@Model.ReviewCount reviews</div>
+            </div>
+            <p class="detail-address">@Model.Address, @Model.City, @Model.Country</p>
+            <p class="detail-description">@Model.Description</p>
+
+            <h2 class="section-title">Basic Information</h2>
+            <div class="amenities-grid">
+                @if (!string.IsNullOrWhiteSpace(Model.AccommodationType))
+                {
+                    <div class="amenity-item">@Model.AccommodationType</div>
+                }
+                @if (Model.AvailableRooms > 0)
+                {
+                    <div class="amenity-item">@Model.AvailableRooms rooms available</div>
+                }
+                @foreach (var item in Model.Facilities.Take(10))
+                {
+                    <div class="amenity-item">@item</div>
+                }
+                <div class="amenity-item">@Model.Adults guests</div>
+            </div>
+        </div>
+
+        <aside class="booking-sidebar">
+            <div class="booking-price">@Model.Price @Model.Currency</div>
+            <div class="booking-unit">Includes taxes and charges when available</div>
+            <div class="booking-details">
+                <div class="booking-row">
+                    <span>Check-in</span>
+                    <strong>@Model.ArrivalDate</strong>
+                </div>
+                <div class="booking-row">
+                    <span>Check-out</span>
+                    <strong>@Model.DepartureDate</strong>
+                </div>
+                <div class="booking-row">
+                    <span>Guests</span>
+                    <strong>@Model.Adults</strong>
+                </div>
+                <hr class="booking-divider">
+                <div class="booking-total">
+                    <span>Total</span>
+                    <span>@Model.Price @Model.Currency</span>
+                </div>
+            </div>
+            <a class="btn btn-primary" asp-controller="Home" asp-action="Hotels" asp-route-destination="@Model.Destination" asp-route-arrivalDate="@Model.ArrivalDate" asp-route-departureDate="@Model.DepartureDate" asp-route-adults="@Model.Adults">Search Again</a>
+            <div class="booking-note">Data comes from Booking Hotel Detail API.</div>
+        </aside>
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-logo">StayFinder</div>
+        <ul class="footer-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Hotels</a></li>
+        </ul>
+    </div>
+</footer>

@@ -1,0 +1,115 @@
+@model HotelSearchDto
+
+@{
+    ViewData["Title"] = "Hotels";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/hotel-booking-platform/css/hotels.css" />
+}
+
+<nav class="main-nav">
+    <div class="container">
+        <a asp-controller="Home" asp-action="Index" class="nav-logo">StayFinder</a>
+        <button class="nav-toggle">Menu</button>
+        <ul class="nav-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels" class="active">Hotels</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Search</a></li>
+        </ul>
+    </div>
+</nav>
+
+<main class="container" style="padding-top: 40px; padding-bottom: 40px;">
+    <div class="section-header">
+        <h2>Find Your Perfect Stay</h2>
+        <p>Discover hotels across Europe's finest cities</p>
+    </div>
+
+    <div class="search-form-container">
+        <form asp-controller="Home" asp-action="Hotels" method="get" class="search-form">
+            <div class="form-group">
+                <label class="form-label">Destination</label>
+                <input type="text" name="destination" class="form-input" placeholder="e.g. Paris" value="@Model.Destination">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Check-in</label>
+                <input type="date" name="arrivalDate" class="form-input" value="@Model.ArrivalDate">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Check-out</label>
+                <input type="date" name="departureDate" class="form-input" value="@Model.DepartureDate">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Guests</label>
+                <input type="number" name="adults" class="form-input" value="@Model.Adults" min="1" max="10">
+            </div>
+            <button type="submit" class="btn btn-primary search-btn">Search</button>
+        </form>
+    </div>
+
+    <div class="results-info">
+        @if (Model.Hotels.Any())
+        {
+            <span><strong>@Model.Hotels.Count</strong> hotels found in <strong>@Model.Destination</strong></span>
+        }
+        else
+        {
+            <span>@Model.Message</span>
+        }
+    </div>
+
+    <div class="hotels-grid">
+        @foreach (var hotel in Model.Hotels)
+        {
+            <div class="hotel-card">
+                @if (!string.IsNullOrWhiteSpace(hotel.PhotoUrl))
+                {
+                    <img class="hotel-image" src="@hotel.PhotoUrl" alt="@hotel.Name">
+                }
+                <div class="hotel-content">
+                    <div class="hotel-header">
+                        <h3 class="hotel-name">@hotel.Name</h3>
+                        @if (!string.IsNullOrWhiteSpace(hotel.ReviewScore))
+                        {
+                            <div class="hotel-rating">@hotel.ReviewScore</div>
+                        }
+                    </div>
+                    <div class="hotel-location">@hotel.ReviewScoreWord @hotel.ReviewCount reviews</div>
+                    <p class="hotel-description">@hotel.Description</p>
+                    <div class="hotel-amenities">
+                        @if (!string.IsNullOrWhiteSpace(hotel.PropertyClass) && hotel.PropertyClass != "0")
+                        {
+                            <span class="amenity-tag">@hotel.PropertyClass stars</span>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(hotel.Checkin))
+                        {
+                            <span class="amenity-tag">Check-in @hotel.Checkin</span>
+                        }
+                        @if (!string.IsNullOrWhiteSpace(hotel.Checkout))
+                        {
+                            <span class="amenity-tag">Check-out @hotel.Checkout</span>
+                        }
+                    </div>
+                    <div class="hotel-footer">
+                        <div class="hotel-price">
+                            <span class="price-value">@hotel.Price</span>
+                            <span class="price-unit">@hotel.Currency</span>
+                        </div>
+                        <a class="btn btn-primary btn-sm" asp-controller="Home" asp-action="Detail" asp-route-hotelId="@hotel.HotelId" asp-route-destination="@Model.Destination" asp-route-arrivalDate="@Model.ArrivalDate" asp-route-departureDate="@Model.DepartureDate" asp-route-adults="@Model.Adults">View Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="footer-logo">StayFinder</div>
+        <ul class="footer-links">
+            <li><a asp-controller="Home" asp-action="Index">Dashboard</a></li>
+            <li><a asp-controller="Home" asp-action="Hotels">Hotels</a></li>
+        </ul>
+    </div>
+</footer>
