@@ -73,11 +73,14 @@ namespace Booking_Rapid.Controllers
             {
                 using var document = await GetJson("https://open-weather13.p.rapidapi.com/city?city=paris&lang=EN", "open-weather13.p.rapidapi.com");
                 var root = document.RootElement;
+                var fahrenheit = GetObject(root, "main").GetProperty("temp").GetDecimal();
+                var celsius = (fahrenheit - 32) * 5 / 9;
+
                 var weather = new WeatherDto
                 {
                     City = GetString(root, "name"),
                     Country = GetString(GetObject(root, "sys"), "country"),
-                    Temperature = GetDecimalString(GetObject(root, "main"), "temp"),
+                    Temperature = celsius.ToString("0.##", CultureInfo.InvariantCulture),
                     Condition = ""
                 };
 
