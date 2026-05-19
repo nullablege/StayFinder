@@ -124,9 +124,8 @@ Uygulama calistiktan sonra tarayicida verilen local adres uzerinden acilabilir.
 GitHub: nullablege
 
 ## Proje Görselleri 
-<img width="3369" height="1271" alt="Screenshot_131" src="https://github.com/user-attachments/assets/72442cc6-3edb-40fa-b5c0-ab6763e5ae98" />
-<img width="3370" height="1271" alt="Screenshot_132" src="https://github.com/user-attachments/assets/5189ac5e-e180-40b1-aea7-366f2764c5b9" />
-<img width="3439" height="1224" alt="Screenshot_127" src="https://github.com/user-attachments/assets/73103b33-c965-4da9-9e35-bb4ca1b069fa" />
-<img width="3439" height="1232" alt="Screenshot_128" src="https://github.com/user-attachments/assets/34437fee-1305-4e43-8857-6cd87cc53800" />
-<img width="3439" height="1226" alt="Screenshot_130" src="https://github.com/user-attachments/assets/746e3836-604b-4d9a-b6cc-0b0ec8072275" />
-
+<img width="2133" height="1221" alt="Screenshot_143" src="https://github.com/user-attachments/assets/7c5b6075-5532-46c5-b928-ac01c9d0e797" />
+<img width="2135" height="1220" alt="Screenshot_144" src="https://github.com/user-attachments/assets/cfefb347-11a7-41dc-8dfb-80a711f05c92" />
+<img width="2133" height="1221" alt="Screenshot_145" src="https://github.com/user-attachments/assets/147699bc-5c9c-4e92-bbd1-1f7bc81ce8ec" />
+<img width="2138" height="1232" alt="Screenshot_146" src="https://github.com/user-attachments/assets/03ad9310-9baf-4cb8-9205-6cb5ffc2c0a4" />
+<img width="2134" height="1225" alt="Screenshot_147" src="https://github.com/user-attachments/assets/62678b4f-fc59-4010-856f-9ff10f7d1250" />
